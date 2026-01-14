@@ -1,23 +1,6 @@
 # <img src="/firefox/icons/icon.svg" width=30> PwnFox
 
-PwnFox is a Firefox/Burp extension that provide usefull tools for your security audit.
-
-If you are a chrome user you can check https://github.com/nccgroup/autochrome. 
-
-- [PwnFox](#img-srcfirefoxiconsiconsvg-width30-pwnfox)
-  - [Features](#features)
-    - [Single click BurpProxy](#single-click-burpproxy)
-    - [Containers Profiles](#containers-profiles)
-    - [PostMessage Logger](#postmessage-logger)
-    - [Toolbox](#toolbox)
-    - [Security header remover](#security-header-remover)
-  - [Installation](#installation)
-  - [Build](#build)
-    - [All](#all)
-    - [Firefox](#firefox)
-    - [Burp](#burp)
-  - [Changelog](#changelog)
-
+PwnFox is a Firefox/Burp extension that provides useful tools for your security audit.
 
 ## Features
 
@@ -25,12 +8,14 @@ If you are a chrome user you can check https://github.com/nccgroup/autochrome.
 
 ### Single click BurpProxy
 
-Connect to Burp with a simple click, this will probably remove the need for other addons like foxyProxy. However if you need the extra features provided by foxyProxy you can leave this unchecked. 
+Connect to Burp with a simple click, this will probably remove the need for other addons like foxyProxy. However if you need the extra features provided by foxyProxy you can leave this unchecked.
+
+Supports both HTTP and SOCKS5 proxy protocols. Configure the protocol in the extension settings.
 
 ###  Containers Profiles
 
 PwnFox give you fast access to the Firefox containers. This allow you to have multiple identities in the same browser. 
-When PwnFox and the `Add container header` option are enabled, PwnFox will automatically add a `X-PwnFox-Color` header to hightlight the query in Burp.
+When PwnFox and the `Add container header` option are enabled, PwnFox will automatically add a `X-PwnFox-Color` header to highlight the query in Burp.
 
 PwnFoxBurp will automatically highlight and strip the header, but you can also specify your own behavior with addons like logger++.
 
@@ -49,7 +34,7 @@ You can also provide your own function to parse/filter the messages.
 You get access to 3 arguments:
  * data -> the message data
  * origin -> the window object representing the origin
- * destion -> the window object representing the destination
+ * destination -> the window object representing the destination
 
 You can return a string or a JSON serializable object.
 
@@ -60,12 +45,10 @@ You can return a string or a JSON serializable object.
 
 Inject you own javascript code on page load. The code will be loaded as soon as possible. This can used to add dangerous behavior detection, or just to add extra function to your js console.
 
-**Be carefull, the injected toolbox will run in the window context. Do not inject secret in untrusted domain.**
+**Be careful, the injected toolbox will run in the window context. Do not inject secrets in untrusted domains.**
 
 
 ![settings](/screenshots/settings.png)
-
-I will publish some of my toolbox soon (ENOTIME)
 
 
 ### Security header remover
@@ -82,12 +65,8 @@ Headers stripped:
 
 
 You can find the latest build here:
-* [https://github.com/B-i-t-K/PwnFox/releases](https://github.com/B-i-t-K/PwnFox/releases)
+* [https://github.com/kasem545/PwnFox/releases](https://github.com/kasem545/PwnFox/releases)
 
-### Firefox
- - visit `about:addons` and choose install from file, then select `PwnFox-$version.xpi`
- - or install from 
-[https://addons.mozilla.org/en-US/firefox/addon/pwnfox/](https://addons.mozilla.org/en-US/firefox/addon/pwnfox/)
 
 ### Burp
 - Go to extender and add `PwnFox-Burp.jar` as a java extension.
@@ -105,13 +84,8 @@ web-ext sign --api-key="$KEY" --api-secret="$SECRET"
 # the xpi file is available in /firefox/web-ext-artifacts/pwnfox-${version}.xpi
 
 ```
-### Burp
-
-Open and compile with Intellij IDEA
 
 ## Changelog
-
-* v1.0.3
-  * Fix missing highlight with burp v2021.4.2
-* v1.0.2
-  * First public release
+* v1.2.0
+  * Added SOCKS5 proxy protocol support
+  * UI improvements - modern dark theme with better UX
