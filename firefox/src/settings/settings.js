@@ -2,6 +2,7 @@ async function main() {
     const $ = i => document.getElementById(i)
 
     const configEl = [
+        [$("burpprotocol"), "proxyProtocol"],
         [$("burphost"), "burpProxyHost"],
         [$("burpport"), "burpProxyPort"],
     ]

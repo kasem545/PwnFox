@@ -9,23 +9,24 @@ const defaultConfig = {
     removeSecurityHeaders: false,
     burpProxyHost: '127.0.0.1',
     burpProxyPort: '8080',
+    proxyProtocol: 'http',
     activeToolbox: null,
     savedToolbox: {},
     devToolDual: false,
     activeMessageFunc: "noop",
     savedMessageFunc: {
-        "noop": `/* 
-* Available parameters: 
+        "noop": `/*
+* Available parameters:
 *   data: the message data
 *   origin: the origin frame
 *   destination: the destination frame
 *
-* return: 
+* return:
 *   new modified message to display
 */
-    
+
 return data
-`}
+    `}
 }
 
 

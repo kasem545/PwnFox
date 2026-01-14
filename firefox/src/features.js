@@ -34,8 +34,10 @@ function proxify(config, onlyContainers) {
             return { type: "direct" };
         const host = await config.get("burpProxyHost")
         const port = await config.get("burpProxyPort")
+        const protocol = await config.get("proxyProtocol")
+        const proxyType = protocol === 'socks' ? 'socks' : 'http'
         return {
-            type: "http",
+            type: proxyType,
             host,
             port
         };
