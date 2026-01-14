@@ -1,4 +1,6 @@
+/* PwnFox Design System - Color Palette */
 :root {
+    /* Firefox container identity colors - DO NOT CHANGE */
     --magenta-50: #ff1ad9;
     --magenta-60: #ed00b5;
     --magenta-70: #b5007f;
@@ -71,4 +73,34 @@
     --ink-80: #202340;
     --ink-90: #0f1126;
     --white-100: #ffffff;
+    
+    /* PwnFox Brand Colors */
+    --pwnfox-orange: #ff6633;
+    --pwnfox-orange-glow: rgba(255, 102, 51, 0.3);
+    --pwnfox-orange-dim: #cc5229;
+    
+    /* UI System Colors */
+    --surface-0: #0a0a0c;
+    --surface-1: #121215;
+    --surface-2: #1a1a1f;
+    --surface-3: #222228;
+    --surface-4: #2a2a32;
+    --surface-raised: #2d2d35;
+    
+    --text-primary: #e8e8ec;
+    --text-secondary: #9898a0;
+    --text-tertiary: #68686f;
+    --text-disabled: #48484f;
+    
+    --border-subtle: rgba(255, 255, 255, 0.06);
+    --border-default: rgba(255, 255, 255, 0.1);
+    --border-strong: rgba(255, 255, 255, 0.15);
+    
+    --status-enabled: #30e60b;
+    --status-disabled: #ff0039;
+    
+    /* Interactive states */
+    --hover-overlay: rgba(255, 255, 255, 0.04);
+    --active-overlay: rgba(255, 255, 255, 0.08);
+    --focus-ring: rgba(255, 102, 51, 0.5);
 }

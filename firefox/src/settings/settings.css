@@ -1,71 +1,269 @@
-@media (prefers-color-scheme: dark) {
-    body {
-        background-color: #202023;
-        color: white;
-    }
+@import '/src/popup/colors.css';
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-    display: flex;
-    font-family: Helvetica, sans-serif;
-    flex-direction: column;
-    justify-items: stretch;
-    align-items: flex-start;
-    font-size: 12px;
-    line-height: 1.2em;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    background: var(--surface-0);
+    color: var(--text-primary);
     min-height: 100vh;
-}
-
-hr {
-    width: 90%;
-    margin-top: 15px;
-    margin-bottom: 15px;
-}
-
-ul {
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    margin-bottom: 10px;
-    list-style: none;
-    padding-left: 0px;
-}
-
-ul ul {
-    padding-left: 20px;
-}
-
-li.option-entry {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-    margin: 5px 0;
-}
-
-label {
-    font-size: 1.2em;
-    color: var(--in-content-primary-button-background);
-}
-
-input, select {
-    margin-left: 5px;
-    padding: 2px;
-}
-
-label::after {
-    content: ":";
-}
-
-button#save {
-    align-self: flex-end;
+    padding: 32px;
+    -webkit-font-smoothing: antialiased;
 }
 
 form {
-    display: contents;
+    max-width: 720px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
 }
 
-textarea {
-    min-height: 300px;
+h2 {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--pwnfox-orange);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border-default);
+}
+
+h2::before {
+    content: "";
+    width: 3px;
+    height: 16px;
+    background: var(--pwnfox-orange);
+    border-radius: 2px;
+}
+
+.option-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+li.option-entry {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 16px;
+    background: var(--surface-2);
+    border: 1px solid var(--border-subtle);
+    border-radius: 10px;
+    transition: all 0.15s ease;
+}
+
+li.option-entry:hover {
+    background: var(--surface-3);
+    border-color: var(--border-default);
+}
+
+li.option-entry:focus-within {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: -2px;
+}
+
+label {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+label::after {
+    content: none;
+}
+
+input[type="text"],
+select {
+    width: 100%;
+    padding: 10px 14px;
+    background: var(--surface-1);
+    border: 1px solid var(--border-default);
+    border-radius: 6px;
+    color: var(--text-primary);
+    font-size: 14px;
+    font-family: ui-monospace, "SF Mono", "Cascadia Code", "Segoe UI Mono", monospace;
+    transition: all 0.15s ease;
+}
+
+input[type="text"]:hover,
+select:hover {
+    border-color: var(--border-strong);
+    background: var(--surface-2);
+}
+
+input[type="text"]:focus,
+select:focus {
+    outline: none;
+    border-color: var(--pwnfox-orange);
+    box-shadow: 0 0 0 3px var(--pwnfox-orange-glow);
+}
+
+input[type="text"]::placeholder {
+    color: var(--text-tertiary);
+}
+
+select {
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%239898a0' d='M2.5 4.5L6 8l3.5-3.5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 36px;
+    cursor: pointer;
+}
+
+select option {
+    background: var(--surface-2);
+    color: var(--text-primary);
+    padding: 8px;
+}
+
+button#save {
+    align-self: flex-start;
+    padding: 10px 24px;
+    background: linear-gradient(145deg, var(--pwnfox-orange), var(--pwnfox-orange-dim));
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 8px var(--pwnfox-orange-glow);
+}
+
+button#save:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px var(--pwnfox-orange-glow);
+}
+
+button#save:active {
+    transform: translateY(0);
+}
+
+button#save:focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 2px;
+}
+
+hr {
+    border: none;
+    height: 1px;
+    background: var(--border-subtle);
+    margin: 8px 0;
+}
+
+.file-list {
+    background: var(--surface-1);
+    border: 1px solid var(--border-default);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.file-list-head {
+    display: grid;
+    grid-template-columns: 1fr repeat(4, 44px);
+    background: var(--surface-2);
+    border-bottom: 1px solid var(--border-default);
+}
+
+.file-list-head select {
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    padding: 12px 16px;
+    font-family: ui-monospace, "SF Mono", "Cascadia Code", "Segoe UI Mono", monospace;
+}
+
+.file-list-head select:focus {
+    box-shadow: none;
+    background: var(--surface-3);
+}
+
+.file-list-head input[type="file"] {
+    display: none;
+}
+
+.file-list-head button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    border-left: 1px solid var(--border-subtle);
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: 12px;
+    transition: all 0.15s ease;
+}
+
+.file-list-head button:hover {
+    background: var(--surface-3);
+    color: var(--text-primary);
+}
+
+.file-list-head button:focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: -2px;
+}
+
+.file-list svg {
+    width: 16px;
+    height: 16px;
+}
+
+.file-list svg path {
+    fill: currentColor;
+}
+
+.file-list-body {
+    display: flex;
+}
+
+.file-list-body textarea {
+    flex: 1;
+    min-height: 320px;
+    padding: 16px;
+    background: var(--surface-1);
+    border: none;
+    color: var(--text-primary);
+    font-family: ui-monospace, "SF Mono", "Cascadia Code", "Segoe UI Mono", monospace;
+    font-size: 13px;
+    line-height: 1.6;
+    resize: vertical;
+}
+
+.file-list-body textarea:focus {
+    outline: none;
+    background: var(--surface-0);
+}
+
+.file-list-body textarea::placeholder {
+    color: var(--text-tertiary);
+}
+
+.file-list-body textarea.changed {
+    box-shadow: inset 3px 0 0 var(--pwnfox-orange);
+}
+
+.file-list-body textarea:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
 }

@@ -9,7 +9,7 @@
 
 <body>
     <header>
-        <div id="icon"><img src="../../icons/icon.svg" width="48" height="48"></div>
+        <div id="icon"><img src="../../icons/icon.svg" width="48" height="48" alt="PwnFox"></div>
         <h1>PwnFox</h1>
         <div class="right">
             <label class="option-entry">
@@ -17,33 +17,34 @@
             </label>
             <a id="settings" href="#">Settings</a>
         </div>
-        <div>&nbsp;</div>
     </header>
     <main>
-        <h2>Options</h2>
-        <hr>
-        <label class="option-entry">
-            Proxify all tabs <input id="option-useBurpProxyAll" type="checkbox">
-        </label>
-        <label class="option-entry">
-            Proxify only containers tabs <input id="option-useBurpProxyContainer" type="checkbox">
-        </label>
-        <label class="option-entry">
-            Add container header <input id="option-addContainerHeader" type="checkbox">
-        </label>
-        <label class="option-entry">
-            Remove security headers <input id="option-removeSecurityHeaders" type="checkbox">
-        </label>
-        <h2>
-            Toolbox
-            <input id="option-injectToolbox" type='checkbox' title="inject">
-        </h2>
-        <hr>
-        <select class="col-123" id="select-toolbox"></select>
-        <h2>New container tab</h2>
-        <hr>
-        <div id="identities">
-        </div>
+        <section>
+            <h2>Proxy Options</h2>
+            <label class="option-entry">
+                Proxify all tabs <input id="option-useBurpProxyAll" type="checkbox">
+            </label>
+            <label class="option-entry">
+                Proxify only container tabs <input id="option-useBurpProxyContainer" type="checkbox">
+            </label>
+        </section>
+        <section>
+            <h2>Security</h2>
+            <label class="option-entry">
+                Add container header <input id="option-addContainerHeader" type="checkbox">
+            </label>
+            <label class="option-entry">
+                Remove security headers <input id="option-removeSecurityHeaders" type="checkbox">
+            </label>
+        </section>
+        <section>
+            <h2>Toolbox <input id="option-injectToolbox" type="checkbox" title="Enable toolbox injection"></h2>
+            <select id="select-toolbox" aria-label="Select toolbox script"></select>
+        </section>
+        <section>
+            <h2>New Container Tab</h2>
+            <div id="identities" role="group" aria-label="Container colors"></div>
+        </section>
     </main>
     <script src="/src/icon.js"></script>
     <script src="/src/config.js"></script>

@@ -1,144 +1,226 @@
-:root {
-    --background-color: #232327;
-    --text-color: #C6C6CA;
+@import '/src/popup/colors.css';
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 html,
 body {
-    padding: 0;
-    margin: 0;
-    color: var(--text-color);
+    height: 100%;
+    overflow: hidden;
+    background: var(--surface-0);
+    color: var(--text-primary);
 }
 
-* {
-    box-sizing: border-box;
+body {
+    font-family: ui-monospace, "SF Mono", "Cascadia Code", "Segoe UI Mono", monospace;
+    font-size: 12px;
+    line-height: 1.4;
+    -webkit-font-smoothing: antialiased;
 }
-
 
 main {
-    background-color: #0C0C0D;
-    font-family: monospace;
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: auto 1fr;
-    grid-template-areas: "toolbar""list";
-    align-items: start;
-    border-bottom: 2px solid black;
+    grid-template-areas: "toolbar" "list";
     height: 100vh;
+    background: var(--surface-0);
 }
 
 main.dual {
-    grid-template-columns: auto 500px;
-    grid-template-areas: "toolbar filter""list filter";
+    grid-template-columns: 1fr 400px;
+    grid-template-areas: "toolbar filter" "list filter";
 }
 
 #message-toolbar {
     grid-area: toolbar;
     display: flex;
-    column-gap: 5px;
-    background: #2a2a2e;
-    padding: 5px;
-    width: 100%;
-}
-
-#message-toolbar svg {
-    padding: 4px;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    background: var(--surface-2);
+    border-bottom: 1px solid var(--border-default);
 }
 
 #message-toolbar button,
 #message-toolbar svg {
-
-    border: none;
-    border-radius: 2px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 12px;
+    background: var(--surface-3);
+    border: 1px solid var(--border-subtle);
+    border-radius: 4px;
+    color: var(--text-secondary);
+    font-size: 11px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.12s ease;
     white-space: nowrap;
-    user-select: none;
-    background-color: rgba(249, 249, 250, 0.2);
-    color: rgb(215, 215, 219);
-    text-align: center;
 }
 
 #message-toolbar button:hover,
 #message-toolbar svg:hover {
-    background-color: rgba(249, 249, 250, 0.3);
-
+    background: var(--surface-4);
+    border-color: var(--border-default);
+    color: var(--text-primary);
 }
 
-#message-list {
-    display: contents;
+#message-toolbar button:active {
+    transform: scale(0.97);
 }
 
-
-#message-table {
-    grid-area: list;
-    overflow-y: auto;
-    overflow-x: hidden;
-    scrollbar-width: thin;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    vertical-align: middle;
-    justify-content: start;
-    counter-reset: message-id;
+#message-toolbar button:focus-visible,
+#message-toolbar svg:focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 1px;
 }
 
-#message-table>.row {
-    top: 0;
-    position: sticky;
-    z-index: 10;
-    background: #2a2a2e;
+#message-toolbar svg {
+    padding: 6px;
+    width: 32px;
+    height: 32px;
 }
 
 .spacer {
     flex-grow: 1;
 }
 
+#toggleDual {
+    fill: var(--text-secondary);
+    cursor: pointer;
+}
+
+#toggleDual:hover {
+    fill: var(--pwnfox-orange);
+}
+
+.dual #toggleDual {
+    fill: var(--pwnfox-orange);
+    background: var(--pwnfox-orange-glow);
+}
+
+#message-table {
+    grid-area: list;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: var(--surface-4) var(--surface-1);
+    counter-reset: message-id;
+}
+
+#message-table > .row {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: var(--surface-2);
+    font-weight: 600;
+    font-size: 10px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    border-bottom: 2px solid var(--border-default);
+}
+
+#message-list {
+    display: contents;
+}
+
 .row {
     display: grid;
-    grid-template-columns: 40px 1fr 1fr 4fr 75px;
-    line-height: 14px;
+    grid-template-columns: 48px 1fr 1fr 3fr 72px;
+    line-height: 1.5;
     font-size: 11px;
-    border-bottom: 1px solid #4E4E51;
-    background: var(--background-color);
-    background: #2a2a2e;
+    background: var(--surface-1);
+    border-bottom: 1px solid var(--border-subtle);
+    transition: background 0.1s ease;
 }
 
 .row:hover {
-    background: #3a3a3e
+    background: var(--surface-2);
 }
-
-.row span::after {
-    display: block;
-    content: "";
-    top: -1px;
-    bottom: -1px;
-    right: 0px;
-    left: -1px;
-    position: absolute;
-    border-right: 1px solid #4E4E51;
-}
-
-#message-list .row span:first-child:before {
-    counter-increment: message-id;
-    content: counter(message-id, decimal-leading-zero)
-}
-
-#message-list .row:hover {
-    border-bottom: 1px solid #4E4E51;
-}
-
-#message-table>.row {
-    border-top: 1px solid #4E4E51;
-    font-weight: bold;
-}
-
 
 .row span {
     position: relative;
+    padding: 6px 10px;
     white-space: nowrap;
-    overflow-x: hidden;
-
+    overflow: hidden;
     text-overflow: ellipsis;
-    padding: 2px 4px;
+    border-right: 1px solid var(--border-subtle);
+}
+
+.row span:last-child {
+    border-right: none;
+    color: var(--text-tertiary);
+    font-variant-numeric: tabular-nums;
+}
+
+#message-list .row span:first-child::before {
+    counter-increment: message-id;
+    content: counter(message-id, decimal-leading-zero);
+    color: var(--text-tertiary);
+}
+
+details {
+    display: contents;
+}
+
+details[open] > summary.row {
+    background: var(--surface-2);
+    border-bottom-color: var(--pwnfox-orange);
+}
+
+summary {
+    cursor: pointer;
+    outline: none;
+    list-style: none;
+}
+
+summary::-webkit-details-marker {
+    display: none;
+}
+
+summary:focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: -2px;
+}
+
+.message-details-content {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 12px 16px;
+    padding: 16px 20px;
+    background: var(--surface-0);
+    border-bottom: 1px solid var(--border-default);
+    border-left: 3px solid var(--pwnfox-orange);
+    margin-left: 8px;
+}
+
+.message-details-content span:nth-child(odd) {
+    font-weight: 600;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    font-size: 10px;
+    letter-spacing: 0.05em;
+    padding-top: 2px;
+}
+
+.message-details-content span:nth-child(even) {
+    white-space: pre-wrap;
+    word-break: break-all;
+    color: var(--text-primary);
+    font-size: 12px;
+    background: var(--surface-1);
+    padding: 8px 12px;
+    border-radius: 4px;
+    border: 1px solid var(--border-subtle);
 }
 
 #message-filter {
@@ -147,43 +229,67 @@ main.dual {
 
 .dual #message-filter {
     grid-area: filter;
-    display: grid;
-    grid-template-rows: 30px auto;
+    display: flex;
+    flex-direction: column;
+    background: var(--surface-1);
+    border-left: 1px solid var(--border-default);
     height: 100%;
+    overflow: hidden;
 }
 
 #message-filter h2 {
-    text-align: center;
+    padding: 10px 16px;
     margin: 0;
-    line-height: 30px;
-    font-weight: lighter;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--pwnfox-orange);
+    background: var(--surface-2);
+    border-bottom: 1px solid var(--border-default);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
 }
 
-textarea {
-    padding: 5px;
-    height: 100%;
-    display: block;
+#message-filter .file-list {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+#message-filter .file-list-head {
+    background: var(--surface-2);
+    border-bottom: 1px solid var(--border-default);
+}
+
+#message-filter .file-list-body {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+}
+
+#message-filter textarea {
+    flex: 1;
+    padding: 12px;
+    background: var(--surface-0);
+    border: none;
+    color: var(--text-primary);
+    font-family: ui-monospace, "SF Mono", "Cascadia Code", "Segoe UI Mono", monospace;
+    font-size: 12px;
+    line-height: 1.5;
     resize: none;
 }
 
-.message-details-content {
-    padding: 10px;
-    display: grid;
-    grid-template-columns: 90px 1fr;
-    row-gap: 10px;
-    column-gap: 10px;
-    background: #0c0c0d;
+#message-filter textarea:focus {
+    outline: none;
+    background: var(--surface-1);
 }
 
-.message-details-content span:nth-child(even) {
-    white-space: pre;
+#message-filter textarea.changed {
+    box-shadow: inset 3px 0 0 var(--pwnfox-orange);
 }
 
-summary {
-    cursor: pointer;
-    outline: 0;
-}
-
-.message-details-content span:nth-child(odd) {
-    border-right: 1px solid #b1b1b3;
+#message-filter textarea:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
 }
